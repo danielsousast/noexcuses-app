@@ -1,15 +1,14 @@
 import React, {useState} from "react"
-import OneSignal from "react-native-onesignal";
 import { Container, Title, Message } from "./styles";
 
-const Notification = (props) => {
-    const [title, setTitle] = useState(props.navigation.state.params.title || " ");
-    const [message, setMessage] = useState(props.navigation.state.params.title || " ");
+const Notification = ({navigation}) => {
+    const [title, setTitle] = useState(navigation.state.params.notification.title || " ");
+    const [body, setBody] = useState(navigation.state.params.notification.description  || " ");
 
     return(
         <Container>
             <Title>{title}</Title>
-            <Message>{message}</Message>
+            <Message>{description}</Message>
         </Container>
     )
 };

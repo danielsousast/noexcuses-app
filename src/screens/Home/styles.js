@@ -13,7 +13,8 @@ export const Header = styled.SafeAreaView`
     border-bottom-color:#ccc
 `;
 export const NotificationList = styled.FlatList`
-  
+  width:100%;
+  margin-top:20px;
 `;
 export const Input = styled.TextInput`
     width:85%;
@@ -25,3 +26,35 @@ export const Input = styled.TextInput`
     padding:10px;
     font-size:18px
 `;
+
+export const Title = styled.Text`
+    font-weight: bold;
+    font-size:20px;
+    margin-left: 20px;
+    margin-top: 20px;
+`
+
+export const User = styled.Text`
+    font-size:20px;
+    margin-left: 20px;
+`
+
+export const CardView = styled.View`
+    margin-top: 20px;
+    flex-direction:row;
+    justify-content:center;
+`
+export const AlertView = styled.View`
+    height:100px;
+    margin:auto;
+    border-radius:4px;
+    background:#cc9618;
+    width:94%;
+
+    justify-content:center;
+    align-content:center;
+`
+
+export const AlertText = styled.Text`
+    align-self:center
+`

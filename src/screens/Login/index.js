@@ -1,32 +1,24 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react";
+import { ActivityIndicator } from "react-native";
 import OneSignal from "react-native-onesignal";
 import { Container, Input, Link, LinkTitle, Loading, Logo } from './styles';
 import DefaulButton from "../../components/DefaultButton";
 import {Platform} from "react-native";
+import { signInRequest } from "../../store/actions/authAction";
+import { useDispatch, useSelector } from "react-redux";
 
 const Login = (props) => {
-    const [loading, setLoading] = useState(false);
     const [notificationData, setNotificationData] = useState({});
+
+    const loading = useSelector(state => state.auth.loading);
+    const dispatch = useDispatch()
+    
+    const [email, setEmail] = useState('')
+    const [pass, setPass] = useState('')
     //334052c2-8d6f-4de4-a6f8-c4acda3aba9f
-    useEffect(()=>{
-        OneSignal.init("390229d4-934b-458e-8969-a863ceef7497");
-        OneSignal.addEventListener('received', onReceived);
-        OneSignal.addEventListener('opened', onOpened);
-        OneSignal.setExternalUserId('1');
-    },[])
 
-    function onReceived(notification){
-        //console.log("Notification received: ", notification);
-    };
-    function onOpened(openResult){
-        const title = openResult.notification.payload.title;
-        const body = openResult.notification.payload.body
-
-        //setNotificationData(data);
-        //console.log('Message: ', openResult.notification.payload.body);
-        //console.log('Data: ', openResult.notification.payload.additionalData);
-        //console.log('openResult: ', openResult)
-        props.navigation.navigate("Notification", {title:title, body:body});
+    function handleSignIn() {
+        dispatch(signInRequest(email, pass));
     }
 
     return(
@@ -36,14 +28,13 @@ const Login = (props) => {
                autoCapitalize="none"
                keyboardType="email-address"
                keyboardAppearance="default"
+               onChangeText={(t) => setEmail(t)}
             />
             <Input placeholder="Senha"
-   
+                keyboardType="visible-password"
+                onChangeText={(t) => setPass(t)}
             />
-            <DefaulButton title="Logar" onPress={() => props.navigation.navigate('Home')}/>
-            <Link>
-                <LinkTitle>Cadastre-se</LinkTitle>
-            </Link>
+            <DefaulButton title="Logar" onPress={handleSignIn}/>
 
             {loading &&
                 <Loading>

@@ -13,7 +13,8 @@ export const Input = styled.TextInput`
     margin-bottom:15px;
     border-radius:25px;
     background-color:#fafafa;
-    padding-left:10px
+    padding-left:10px;
+    border: 1px solid #1B4F72;
 `;
 
 export const Link = styled.TouchableOpacity`
