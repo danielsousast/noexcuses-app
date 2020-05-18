@@ -5,7 +5,7 @@ export const Container = styled.View`
     height: ${props=>props.width || '50px'};
     justify-content:center;
     align-items:center;
-    background:#fff;
+    background:#1e222b;
     margin:4px;
     border-radius:4px;
 `;

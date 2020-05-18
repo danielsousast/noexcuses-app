@@ -13,7 +13,6 @@ export function* SignIn({payload}) {
     
         const { token, user_data} = response.data;
 
-    
         yield put(signInSuccess(token, user_data));
     } catch (error) {
         Alert.alert('Falha no login',error.message);

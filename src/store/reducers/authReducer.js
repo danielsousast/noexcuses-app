@@ -21,6 +21,7 @@ const authReducer = (state = initialState, action) => {
       }
       case '@auth/SIGN_FAILURE': {
         draft.loading = false;
+        draft.signed = false;
         break;
       }
       case '@auth/CHANGE_TOKEN': {

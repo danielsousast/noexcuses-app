@@ -1,18 +1,23 @@
 import styled from 'styled-components/native';
 
 export const Container = styled.TouchableOpacity`
-    width:94%;
-    padding:10px;
-    background-color:#fff;
-    border-radius:4px;
-    align-self:center;
-    margin:5px
+    background: #1e222b;
+    height: 100px;
+    margin: 15px 16px;
+    border-radius: 8px;
+    flex-direction: row;
+    padding: 15px;
+    align-items: center;
 `;
 export const Title = styled.Text`
-    font-weight:bold
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
 `;
 export const Body = styled.View`
-  
+    color: #fff;
+    font-size: 14px;
+    margin-top: 5px;
 `;
 export const Text = styled.Text`
   

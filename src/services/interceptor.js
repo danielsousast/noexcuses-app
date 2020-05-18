@@ -1,24 +1,16 @@
-import axios from 'axios';
-import { store } from '../store';
+import { store } from '../store'
 import { signOut } from '../store/actions/authAction';
-import { useEffect } from 'react';
+import api from './api';
 
-const api = axios.create({
-  baseURL: 'https://devkode.com.br/',
-});
-
+export default store => {
     api.interceptors.response.use(function (response) {
       return response;
     }, function (error) {
       if (401 === error.response.status) {
-        store.dispatch(signOut())
+        alert(error.response.status)
+        store.dispatch(signOut());
       } else {
         return Promise.reject(error);
       }
     });
-
-
-
-
-
-export default api;
+}

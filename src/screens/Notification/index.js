@@ -1,15 +1,16 @@
 import React, {useState} from "react"
+import { WebView } from 'react-native-webview';
 import { Container, Title, Message } from "./styles";
 
-const Notification = ({navigation}) => {
-    const [title, setTitle] = useState(navigation.state.params.notification.title || " ");
-    const [body, setBody] = useState(navigation.state.params.notification.description  || " ");
-
+const Notification = ({navigation, route}) => {
+    const { id } = route.params;
+    alert(id)
     return(
-        <Container>
-            <Title>{title}</Title>
-            <Message>{description}</Message>
-        </Container>
+        <WebView
+            source={{ uri: `https://devkode.com.br/api/notification/${id}` }}
+        >
+
+        </WebView>
     )
 };
 
