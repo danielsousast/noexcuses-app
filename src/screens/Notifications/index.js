@@ -1,62 +1,69 @@
-import React, {useState, useEffect} from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, {useState, useEffect, useCallback} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
+import {useNavigation} from '@react-navigation/native';
+
+import Icon from 'react-native-vector-icons/MaterialIcons';
+
 import api from '../../services/api';
-import notificationsdata from './notifications';
-import { changeToken } from '../../store/actions/authAction';
+import {Container, List, Header, BackButton, ScreenTitle} from './styles';
 
-import {
-    Container, Header, HeaderTitle, HeaderButton, HeaderButtonTitle,
-    NotificationsList, MessageContainer, Message, Date, Divider
-} from './styles';
+import NotificationItem from '../../components/NotificationItem';
+import Loading from '../../components/Loading';
 
+const Notifications = () => {
+  const [notifications, setNotifications] = useState([]);
+  const [loading, setLoading] = useState(false);
 
+  const navigation = useNavigation();
+  const token = useSelector(state => state.auth.token);
 
-const Notifications = ({navigation}) => {
-    const [notifications, setNotifications] = useState([]);
-    const token = useSelector(state => state.auth.token);
-    const dispatch = useDispatch();
+  useEffect(() => {
+    async function loadNotifications() {
+      setLoading(true);
+      const response = await api.post('api/private/history', {
+        token,
+      });
 
-    useEffect(() => {
-        async function loadNotifications() {
-            const response = await api.post('api/private/history', {
-                token
-            });
+      if (response.data) {
+        setNotifications(response.data.notifications.data);
+      }
+      setLoading(false);
+    }
 
-            if (response.data) {
+    loadNotifications();
+  }, []);
 
-                setNotifications(response.data.notifications.data)
-            }
-        }
+  const handleNavigateToNotification = useCallback(notificationId => {
+    navigation.navigate('Notification', {notificationId: notificationId});
+  }, []);
 
-       loadNotifications()
-    }, []);
+  return (
+    <>
+      <Container>
+        <Header>
+          <BackButton onPress={() => navigation.goBack()}>
+            <Icon name="keyboard-backspace" size={26} />
+          </BackButton>
+        </Header>
+        <ScreenTitle>Notificações</ScreenTitle>
+        <List
+          contentContainerStyle={{
+            paddingHorizontal: 20,
+          }}
+          showsVerticalScrollIndicator={false}
+          data={notifications}
+          keyExtractor={item => String(item.id)}
+          renderItem={({item}) => (
+            <NotificationItem
+              data={item}
+              onPress={() => handleNavigateToNotification(item.id)}
+            />
+          )}
+        />
+      </Container>
+      {loading && <Loading />}
+    </>
+  );
+};
 
-    return (
-        <Container>
-            <Header>
-                <HeaderTitle>Notificações</HeaderTitle>
-                <HeaderButton>
-                    <HeaderButtonTitle>Configurar</HeaderButtonTitle>
-                </HeaderButton>
-            </Header>
-            <NotificationsList>
-            <Divider />
-                {
-                    notifications.map(item => (
-                        <>
-                            <MessageContainer 
-                                onPress={() => navigation.navigate('Notification', {id: item.id})}
-                            >
-                                <Message>{item.title}</Message>
-                                <Date>{item.description}</Date>
-                            </MessageContainer>
-                            <Divider />
-                        </>
-                    ))
-                }
-            </NotificationsList>
-        </Container>
-    )
-}
-
-export default Notifications
+export default Notifications;

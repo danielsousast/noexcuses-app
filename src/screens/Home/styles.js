@@ -1,64 +1,88 @@
 import styled from 'styled-components/native';
+import colors from '../../styles/colors';
 
 export const Container = styled.View`
-    background-color: #f4f4f4;
-`;
-export const Header = styled.SafeAreaView`
-    width:100%;
-    height:120px;
+  flex: 1;
 `;
 
+export const Header = styled.View``;
 
-export const Title = styled.Text`
-    font-weight: bold;
-    font-size:18px;
-    margin-left: 20px;
-    margin-top: 20px;
-    color:#151515;
-`
-
-export const User = styled.Text`
-    font-size:20px;
-    margin-left: 20px;
-    color:#151515;
-`
-
-export const Scroll = styled.ScrollView.attrs({
-    horizontal: true,
-    showsHorizontalScrollIndicator: false,
-    contentContainerStyle: {
-        paddingLeft: 16
-    }
-})`
-    margin-top: 10px;
+export const Content = styled.View`
+  flex: 1;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  padding: 20px;
 `;
 
-export const SmallItem = styled.TouchableOpacity`
-    width: 90px;
-    height:90px;
-    background-color: #fff;
-    margin-right: 16px;
-    border-radius: 8px;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 30px;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.8);
+export const Welcome = styled.Text`
+  margin-top: 20px;
+  margin-left: 20px;
+  color: ${colors.black};
+  font-size: 20px;
 `;
 
-export const SmallDescription = styled.Text`
-    font-size: 12px;
-    color: #2b2b2b;
+export const Username = styled.Text`
+  color: ${colors.black};
+  font-size: 22px;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-left: 20px;
 `;
 
-
-export const BigItem = styled.TouchableOpacity`
-    width: 120px;
-    height:180px;
-    background-color: #fff;
-    margin-right: 16px;
-    border-radius: 8px;
-    justify-content: center;
-    align-items: center;
+export const Background = styled.ImageBackground`
+  width: 100%;
+  height: 100%;
 `;
 
+export const SectionTitle = styled.Text`
+  color: ${colors.black};
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+`;
 
+export const Card = styled.TouchableOpacity`
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  align-self: center;
+  margin-top: 20px;
+  background: ${colors.white};
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+`;
+
+export const CardLeft = styled.View`
+  width: 80px;
+  height: 80px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  background: ${props => props.color || '#eee'};
+`;
+
+export const CardCenter = styled.View`
+  flex: 1;
+  height: 80px;
+  justify-content: center;
+  align-items: flex-start;
+  padding-left: 20px;
+  padding-right: 10px;
+`;
+
+export const CardRight = styled.View``;
+
+export const CardTitle = styled.Text`
+  font-size: 20px;
+  color: #3c4560;
+  font-weight: bold;
+`;
+
+export const CardDescription = styled.Text`
+  font-size: 17px;
+  color: #3c4560;
+  margin-top: 10px;
+  line-height: 24px;
+`;

@@ -1,80 +1,84 @@
-import React, { useState, useEffect } from 'react';
-import { StatusBar, Dimensions,StyleSheet } from "react-native";
-import Icon from "react-native-vector-icons/SimpleLineIcons";
-
+import React, {useState, useEffect} from 'react';
+import {StatusBar, Dimensions, StyleSheet} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {
-    Container,
-    Header,
-    Title,
-    User,
-    Scroll,
-    SmallItem,
-    SmallDescription, 
-    BigItem
+  Container,
+  Content,
+  Header,
+  Username,
+  Card,
+  CardLeft,
+  CardCenter,
+  CardRight,
+  CardTitle,
+  CardDescription,
+  Welcome,
 } from './styles';
-
-import { useSelector, useDispatch } from 'react-redux';
+import {styles} from '../../styles/all';
+import {useSelector, useDispatch} from 'react-redux';
 import api from '../../services/api';
 
-const Home = ({ navigation }) => {
-    const [notifications, setNotifications] = useState([]);
-    const token = useSelector(state => state.auth.token);
-    //const name = useSelector(state => state.user.profile.name);
-    const dispatch = useDispatch();
+const Home = ({navigation}) => {
+  const [notifications, setNotifications] = useState([]);
+  const token = useSelector(state => state.auth.token);
+  const name = useSelector(state => state.user.profile.name);
+  const dispatch = useDispatch();
 
-    useEffect(() => {
-        async function loadNotifications() {
-            const response = await api.post('api/private/history', {
-                token
-            });
+  useEffect(() => {
+    async function loadNotifications() {
+      const response = await api.post('api/private/history', {
+        token,
+      });
 
-            if (response.data) {
-                setNotifications(response.data.notifications.data)
-            }
-        }
+      if (response.data) {
+        setNotifications(response.data.notifications.data);
+      }
+    }
 
-       // loadNotifications()
-    }, [])
+    // loadNotifications()
+  }, []);
 
-    return (
-        <Container>
-            <Header>
-                <Title>Olá</Title>
-                <User>teste</User>
-            </Header>
-            <Title>O que você está procurando?</Title>
-            <Scroll horizontal>
-                <SmallItem onPress={()=>navigation.navigate('Notifications')} style={styles.sombra}>
-                    <Icon name="bell" color="#21a9ed" size={35}/>
-                    <SmallDescription>Notificações</SmallDescription>
-                </SmallItem>
-                <SmallItem onPress={()=>navigation.navigate('Groups')} style={styles.sombra}>
-                    <Icon name="people" color="#21a9ed" size={35}/>
-                    <SmallDescription>Grupos</SmallDescription>                    
-                </SmallItem>
-                <SmallItem onPress={()=>navigation.navigate('Favorite')} style={styles.sombra}>
-                    <Icon name="heart" color="#21a9ed" size={35}/>
-                    <SmallDescription>Favoritos</SmallDescription> 
-                </SmallItem>
-            </Scroll>
+  return (
+    <Container>
+      <Header>
+        <Welcome>Olá,</Welcome>
+        <Username>Daniel Sousa</Username>
+      </Header>
 
-            <StatusBar barStyle="dark-content" />
-        </Container>
-    )
-}
+      <Content>
+        <Card
+          style={styles.shadow}
+          onPress={() => navigation.navigate('Notifications')}
+          activeOpacity={0.6}>
+          <CardLeft color="rgba(89, 116, 255, 0.2)">
+            <Icon name="notifications" size={35} color="rgb(89, 116, 255)" />
+          </CardLeft>
+          <CardCenter>
+            <CardTitle>Notificações</CardTitle>
+            <CardDescription>Veja todas as suas Notificações</CardDescription>
+          </CardCenter>
+          <CardRight />
+        </Card>
 
-const styles = StyleSheet.create({
-  sombra: {
-    shadowColor: "#000",
-    shadowOffset: {
-        width: 5,
-        height: 4,
-    },
-    shadowOpacity: 0.45,
-    shadowRadius: 3.84,
-    elevation: 10,
-  }
-})
+        <Card
+          style={styles.shadow}
+          activeOpacity={0.6}
+          onPress={() => navigation.navigate('Groups')}>
+          <CardLeft color="rgba(255, 103, 80, 0.2)">
+            <Icon name="group" size={35} color="#FF6750" />
+          </CardLeft>
+          <CardCenter>
+            <CardTitle>Grupos</CardTitle>
+            <CardDescription>
+              Veja os grupos que participa ou pode participar{' '}
+            </CardDescription>
+          </CardCenter>
+          <CardRight />
+        </Card>
+      </Content>
+    </Container>
+  );
+};
 
 export default Home;

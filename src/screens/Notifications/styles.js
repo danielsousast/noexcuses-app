@@ -1,56 +1,31 @@
 import styled from 'styled-components/native';
+import colors from '../../styles/colors';
 
 export const Container = styled.View`
-background: #fff;
-  flex:1;
+  flex: 1;
 `;
 
 export const Header = styled.View`
-    height:50px;
-    padding: 0 16px;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
 `;
 
-export const HeaderTitle = styled.Text`
-    color:#151515;
-  font-size: 18px;
+export const BackButton = styled.TouchableOpacity`
+  justify-content: center;
+  align-items: center;
+  margin-left: 20px;
 `;
 
-export const HeaderButton = styled.TouchableOpacity`
-   justify-content:center;
-   align-items: center;
+export const ScreenTitle = styled.Text`
+  font-size: 24px;
+  font-weight: bold;
+  color: ${colors.black};
+  margin-left: 20px;
 `;
 
-export const HeaderButtonTitle = styled.Text`
-    color:#21a9ed;
-`;
-
-export const NotificationsList = styled.ScrollView`
-  background: #fff;
-`;
-
-export const MessageContainer = styled.TouchableOpacity`
-    margin: 0 16px;
-    padding: 12px 0;
-`;
-
-export const Message = styled.Text`
-    color:rgba(0,0,0,0.6);
-    font-size: 16px;
-    font-weight:200;
-    margin: 10px 0;
-    
-`;
-
-export const Date = styled.Text`
-   color:rgba(0,0,0,0.6);
-`;
-
-export const Divider = styled.View`
-    height: 1px;
-    background-color:#ccc;
-    width: 90%;
-    margin: auto;
+export const List = styled.FlatList`
+  width: 100%;
+  margin-top: 20px;
 `;

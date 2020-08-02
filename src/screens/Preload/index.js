@@ -8,6 +8,7 @@ import { addNotification } from '../../store/actions/userActions';
 
 export default function Preload({navigation}){
     const signed = useSelector(state => state.auth.signed);
+    const profile = useSelector(state => state.user.profile)
     const dispatch = useDispatch();
     
     useEffect(() => {
@@ -22,7 +23,7 @@ export default function Preload({navigation}){
     useEffect(()=>{
       OneSignal.init(oneSignalKey);
       OneSignal.addEventListener('opened', onOpened);
-      OneSignal.setExternalUserId('1');
+      OneSignal.setExternalUserId(profile.id);
   },[])
 
   function onOpened(openResult){

@@ -1,49 +1,52 @@
 import styled from 'styled-components/native';
+import colors from '../../styles/colors';
 
 export const Container = styled.View`
-  flex:1;
+  flex: 1;
 `;
 
-export const ProfileCard = styled.View`
-  width: 200px;
-  border-bottom-width: 1px;
-  border-bottom-color: #eee;
+export const Header = styled.View`
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 200px;
+  padding-top: 50px;
 `;
 
-export const User = styled.Text`
-  font-size: 20px;
+export const Avatar = styled.Image`
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  margin-bottom: 20px;
+`;
+
+export const Name = styled.Text`
+  font-size: 22px;
   font-weight: bold;
-  margin-top: 15px;
-  color: #151515;
+  color: ${colors.black};
 `;
 
-export const Label = styled.Text`
-  margin-left: 15px;
-  margin-bottom: 15px;
-  font-weight: 600;
+export const Email = styled.Text`
   font-size: 18px;
+  color: #999;
+`;
+
+export const Menu = styled.View`
+  justify-content: center;
+  padding-top: 30px;
 `;
 
 export const MenuItem = styled.TouchableOpacity`
-  width: 100%;
-  height: 50px;
-  justify-content: center;
+  width: 90%;
+  flex-direction: row;
+  align-self: center;
   align-items: center;
-  background-color: #fff;
+  padding: 10px;
+  margin-bottom: 15px;
+  background: #fff;
+  border-radius: 6px;
 `;
 
-export const MenuLabel = styled.Text`
-  font-size: 16px;
+export const MenuText = styled.Text`
+  margin-left: 10px;
+  font-size: 18px;
+  color: ${colors.black};
 `;
-
-export const Divider = styled.View`
-    height: 1px;
-    background-color:#eee;
-    width: 100%;
-    align-self: center;
-`;
-
