@@ -27,5 +27,5 @@ export const ScreenTitle = styled.Text`
 
 export const List = styled.FlatList`
   width: 100%;
-  margin-top: 20px;
+  margin-top: 10px;
 `;

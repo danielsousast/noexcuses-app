@@ -1,5 +1,6 @@
 import React, {useCallback} from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import {useDispatch} from 'react-redux';
 import {
   Container,
   Header,
@@ -10,10 +11,16 @@ import {
   MenuItem,
   MenuText,
 } from './styles';
+import {styles} from '../../styles/all';
 import colors from '../../styles/colors';
+import {signOut} from '../../store/actions/authAction';
 
 const Profile = () => {
-  const handleSignOut = useCallback(async () => {}, []);
+  const dispath = useDispatch();
+
+  const handleSignOut = useCallback(async () => {
+    dispath(signOut());
+  }, []);
 
   return (
     <Container>
@@ -29,11 +36,11 @@ const Profile = () => {
         <Email>daniel@email.com</Email>
       </Header>
       <Menu>
-        <MenuItem>
+        <MenuItem style={styles.shadow}>
           <Icon name="help-outline" size={30} color={colors.blue} />
           <MenuText>Suporte</MenuText>
         </MenuItem>
-        <MenuItem onPress={handleSignOut}>
+        <MenuItem style={styles.shadow} onPress={handleSignOut}>
           <Icon name="exit-to-app" size={30} color={colors.blue} />
           <MenuText>Sair</MenuText>
         </MenuItem>

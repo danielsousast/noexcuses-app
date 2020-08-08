@@ -1,7 +1,7 @@
-import React, {useState, useEffect, useCallback} from 'react';
+import React, {useState, useEffect, useCallback, useMemo} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
-
+import {format, parseISO} from 'date-fns';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import api from '../../services/api';
@@ -37,6 +37,17 @@ const Notifications = () => {
     navigation.navigate('Notification', {notificationId: notificationId});
   }, []);
 
+  const formatedNotifications = useMemo(() => {
+    return notifications.map(({id, title, description, send_on}) => {
+      return {
+        id,
+        title,
+        description,
+        dateFormatted: format(parseISO(send_on), 'mm/dd/yyyy'),
+      };
+    });
+  }, [notifications]);
+
   return (
     <>
       <Container>
@@ -49,9 +60,10 @@ const Notifications = () => {
         <List
           contentContainerStyle={{
             paddingHorizontal: 20,
+            paddingBottom: 10,
           }}
           showsVerticalScrollIndicator={false}
-          data={notifications}
+          data={formatedNotifications}
           keyExtractor={item => String(item.id)}
           renderItem={({item}) => (
             <NotificationItem

@@ -97,7 +97,7 @@ const Groups = () => {
             <List
               contentContainerStyle={{
                 paddingHorizontal: 20,
-                paddingBottom: 20,
+                paddingBottom: 10,
               }}
               data={groupsData}
               showsVerticalScrollIndicator={false}
@@ -114,6 +114,7 @@ const Groups = () => {
             <List
               contentContainerStyle={{
                 paddingHorizontal: 20,
+                paddingBottom: 10,
               }}
               data={groupsData}
               showsVerticalScrollIndicator={false}

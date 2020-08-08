@@ -47,6 +47,7 @@ export const MenuItem = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
   margin-right: 40px;
+  elevation: 1;
 `;
 
 export const MenuItemText = styled.Text`

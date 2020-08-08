@@ -7,7 +7,7 @@ export const Container = styled.TouchableOpacity`
   background: white;
   border-radius: 10px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-  margin-top: 20px;
+  margin-top: 15px;
 `;
 
 export const GroupIcon = styled.View`

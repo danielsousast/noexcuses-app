@@ -21,7 +21,7 @@ const NotificationItem = ({data, onPress}) => {
         </IconView>
         <Title>{data.title}</Title>
         <DateContainer>
-          <Date>{data.send_on}</Date>
+          <Date>{data.dateFormatted}</Date>
         </DateContainer>
       </Header>
       <Description>{data.description}</Description>
