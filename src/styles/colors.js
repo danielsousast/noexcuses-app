@@ -4,4 +4,5 @@ export default {
   white: '#fff',
   lightBlue: '#F4FAFC',
   orange: '#FF6750',
+  background: '#f4f4f4',
 };

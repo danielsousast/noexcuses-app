@@ -3,6 +3,7 @@ import colors from '../../styles/colors';
 
 export const Container = styled.View`
   flex: 1;
+  background: ${colors.background};
 `;
 
 export const Header = styled.View`
@@ -35,12 +36,13 @@ export const Menu = styled.View`
 `;
 
 export const MenuItem = styled.TouchableOpacity`
-  width: 90%;
+  width: 100%;
   flex-direction: row;
   align-self: center;
   align-items: center;
-  padding: 10px;
-  margin-bottom: 15px;
+  padding: 16px;
+  border-bottom-width: 1px;
+  border-bottom-color: #eee;
   background: #fff;
   border-radius: 6px;
 `;
@@ -48,5 +50,6 @@ export const MenuItem = styled.TouchableOpacity`
 export const MenuText = styled.Text`
   margin-left: 10px;
   font-size: 18px;
+  font-weight: 700;
   color: ${colors.black};
 `;

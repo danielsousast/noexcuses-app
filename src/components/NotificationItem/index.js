@@ -17,14 +17,14 @@ const NotificationItem = ({data, onPress}) => {
     <Container activeOpacity={0.4} style={styles.shadow} onPress={onPress}>
       <Header>
         <IconView>
-          <Icon name="notifications" size={30} color={colors.orange} />
+          <Icon name="notifications" size={26} color={colors.orange} />
         </IconView>
         <Title>{data.title}</Title>
         <DateContainer>
           <Date>{data.dateFormatted}</Date>
         </DateContainer>
       </Header>
-      <Description>{data.description}</Description>
+      <Description numberOfLines={2}>{data.description}</Description>
     </Container>
   );
 };

@@ -1,8 +1,10 @@
 import styled from 'styled-components/native';
+import colors from '../../styles/colors';
 
 export const Container = styled.KeyboardAvoidingView`
   flex: 1;
   justify-content: center;
+  background: ${colors.background};
 `;
 
 export const Input = styled.TextInput`
@@ -13,7 +15,7 @@ export const Input = styled.TextInput`
   margin-bottom: 15px;
   border-radius: 25px;
   background-color: #fafafa;
-  padding-left: 20px;
+  padding-left: 30px;
 `;
 
 export const Link = styled.TouchableOpacity`
@@ -23,7 +25,7 @@ export const Link = styled.TouchableOpacity`
 
 export const LinkTitle = styled.Text`
   font-size: 18px;
-  color: #1b4f72;
+  color: #226bf2;
 `;
 
 export const Loading = styled.View`
@@ -39,7 +41,7 @@ export const Loading = styled.View`
 
 export const Logo = styled.Text`
   font-size: 28px;
-  color: #1b4f72;
+  color: #226bf2;
   font-weight: bold;
   margin-top: -20px;
   margin-bottom: 38px;

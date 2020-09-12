@@ -5,9 +5,9 @@ export const Container = styled.TouchableOpacity`
   width: 100%;
   padding: 20px;
   background: white;
-  border-radius: 10px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-  margin-top: 15px;
+  border-radius: 8px;
+  border-bottom-width: 1px;
+  border-bottom-color: #eee;
 `;
 
 export const GroupIcon = styled.View`
@@ -22,13 +22,13 @@ export const GroupInfo = styled.View`
 `;
 
 export const GroupTitle = styled.Text`
-  font-size: 20px;
+  font-size: 16px;
   color: #3c4560;
   font-weight: bold;
 `;
 
 export const GroupDescription = styled.Text`
-  font-size: 17px;
+  font-size: 14px;
   color: #3c4560;
   margin-top: 10px;
   line-height: 24px;

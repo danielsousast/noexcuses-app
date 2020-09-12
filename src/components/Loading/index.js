@@ -13,7 +13,7 @@ export default function Loading() {
         justifyContent: 'center',
         alignItems: 'center',
       }}>
-      <ActivityIndicator size="large" color="#4775f2" />
+      <ActivityIndicator size="large" color="#fff" />
     </View>
   );
 }

@@ -17,7 +17,7 @@ const GroupItem = ({grupo, onPress, badge}) => {
     <Container activeOpacity={0.4} onPress={onPress} style={styles.shadow}>
       <Header>
         <GroupIcon>
-          <Icon name="group" size={30} color={colors.orange} />
+          <Icon name="group" size={26} color={colors.orange} />
         </GroupIcon>
         <GroupTitle>{grupo.name}</GroupTitle>
         <DateContainer>

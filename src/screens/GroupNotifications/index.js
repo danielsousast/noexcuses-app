@@ -6,7 +6,7 @@ import React, {
   useLayoutEffect,
 } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {DrawerActions, useNavigation} from '@react-navigation/native';
+import {DrawerActions, useNavigation, useRoute} from '@react-navigation/native';
 import {format, parseISO} from 'date-fns';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -19,17 +19,20 @@ import colors from '../../styles/colors';
 import {Button} from 'react-native';
 import {Header} from 'react-native-elements';
 
-const Notifications = () => {
+const GroupNotifications = () => {
   const [notifications, setNotifications] = useState([]);
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(false);
 
   const navigation = useNavigation();
+  const route = useRoute();
+
   const token = useSelector(state => state.auth.token);
+  const groupId = route.params.groupId;
 
   async function loadNotifications() {
     setLoading(true);
-    const response = await api.post('api/private/history', {
+    const response = await api.post(`api/group/${groupId}/history`, {
       token,
     });
 
@@ -85,11 +88,11 @@ const Notifications = () => {
             style: {fontSize: 18, color: '#fff', fontWeight: '700'},
           }}
           leftComponent={{
-            icon: 'menu',
+            icon: 'chevron-left',
             color: '#fff',
-            size: 28,
+            size: 38,
 
-            onPress: () => navigation.openDrawer(),
+            onPress: () => navigation.goBack(),
           }}
           rightComponent={{
             icon: 'settings',
@@ -117,4 +120,4 @@ const Notifications = () => {
   );
 };
 
-export default Notifications;
+export default GroupNotifications;

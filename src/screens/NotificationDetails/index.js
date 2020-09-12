@@ -5,7 +5,7 @@ import {useSelector} from 'react-redux';
 import api from '../../services/api';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const Notification = ({navigation, route}) => {
+const NotificationDetails = ({navigation, route}) => {
   const {notificationId} = route.params;
   const token = useSelector(state => state.auth.token);
 
@@ -24,15 +24,15 @@ const Notification = ({navigation, route}) => {
   return (
     <Container>
       <BackButton onPress={() => navigation.goBack()}>
-        <Icon name="keyboard-backspace" size={26} />
+        <Icon name="keyboard-backspace" size={26} color="#3c4560" />
       </BackButton>
       <WebView
         source={{
-          uri: notificationLink,
+          uri: `https://devkode.com.br/api/notification/${notificationId}`,
         }}
       />
     </Container>
   );
 };
 
-export default Notification;
+export default NotificationDetails;

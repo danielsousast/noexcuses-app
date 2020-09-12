@@ -3,11 +3,10 @@ import colors from '../../styles/colors';
 
 export const Container = styled.TouchableOpacity`
   width: 100%;
-  padding: 20px;
+  padding: 16px;
   background: white;
-  border-radius: 10px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-  margin-top: 15px;
+  border-bottom-width: 1px;
+  border-bottom-color: #eee;
 `;
 
 export const IconView = styled.View`
@@ -17,18 +16,19 @@ export const IconView = styled.View`
 `;
 
 export const Title = styled.Text`
-  font-size: 18px;
+  font-size: 16px;
   color: #3c4560;
   font-weight: bold;
   width: 200px;
 `;
 
 export const Description = styled.Text`
-  font-size: 17px;
+  font-size: 14px;
   color: #3c4560;
   margin-top: 10px;
   line-height: 24px;
   margin-bottom: 10px;
+  width: 300px;
 `;
 
 export const Button = styled.View`
@@ -42,7 +42,7 @@ export const Header = styled.View`
 `;
 
 export const DateContainer = styled.View`
-  background: #4775f2;
+  background: #fcd76c;
   border-radius: 10px;
   flex-direction: row;
   align-items: center;
@@ -54,7 +54,7 @@ export const DateContainer = styled.View`
 `;
 
 export const Date = styled.Text`
-  color: white;
+  color: #333;
   font-size: 10px;
   font-weight: 600;
   text-transform: uppercase;

@@ -10,29 +10,19 @@ import {requestGroupPermission} from '../../store/actions/userActions';
 import Loading from '../../components/Loading';
 import {Header} from 'react-native-elements';
 
-const Groups = () => {
+const PrivateGroups = () => {
   const [groupsList, setGroupsList] = useState([]);
 
   const token = useSelector(state => state.auth.token);
   const [loading, setLoading] = useState(false);
 
-  const [active, setActive] = useState(1);
-
   const dispatch = useDispatch();
   const navigation = useNavigation();
-
-  function getPrivateGroups() {
-    return api.post('api/group/all', {token});
-  }
-
-  function getUserGroups() {
-    return api.post('api/group/list', {token});
-  }
 
   useEffect(() => {
     async function loadGroups() {
       setLoading(true);
-      const response = await api.post('api/group/list', {token});
+      const response = await api.post('api/group/all', {token});
 
       setGroupsList(response.data.groups.data);
       setLoading(false);
@@ -42,7 +32,19 @@ const Groups = () => {
   }, []);
 
   function handleGroup(id) {
-    navigation.navigate('GroupNotifications', {groupId: id});
+    Alert.alert(
+      'Grupo Privado',
+      'Deseja solicitar permissão?',
+      [
+        {
+          text: 'Sim',
+          onPress: () => dispatch(requestGroupPermission(id, token)),
+          style: 'cancel',
+        },
+        {text: 'Não', onPress: () => console.log('OK Pressed')},
+      ],
+      {cancelable: false},
+    );
   }
 
   return (
@@ -54,15 +56,15 @@ const Groups = () => {
             backgroundColor: '#64d8d7',
           }}
           centerComponent={{
-            text: 'Grupos',
+            text: 'Notificações',
             style: {fontSize: 18, color: '#fff', fontWeight: '700'},
           }}
           leftComponent={{
-            icon: 'chevron-left',
+            icon: 'menu',
             color: '#fff',
-            size: 38,
+            size: 28,
 
-            onPress: () => navigation.goBack(),
+            onPress: () => navigation.openDrawer(),
           }}
           rightComponent={{
             icon: 'settings',
@@ -105,4 +107,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Groups;
+export default PrivateGroups;
