@@ -56,7 +56,7 @@ const PrivateGroups = () => {
             backgroundColor: '#64d8d7',
           }}
           centerComponent={{
-            text: 'Notificações',
+            text: 'Grupos Privados',
             style: {fontSize: 18, color: '#fff', fontWeight: '700'},
           }}
           leftComponent={{

@@ -54,7 +54,7 @@ const Groups = () => {
             backgroundColor: '#64d8d7',
           }}
           centerComponent={{
-            text: 'Grupos',
+            text: 'Meus Grupos',
             style: {fontSize: 18, color: '#fff', fontWeight: '700'},
           }}
           leftComponent={{
@@ -63,11 +63,6 @@ const Groups = () => {
             size: 38,
 
             onPress: () => navigation.goBack(),
-          }}
-          rightComponent={{
-            icon: 'settings',
-            color: '#fff',
-            size: 28,
           }}
         />
 

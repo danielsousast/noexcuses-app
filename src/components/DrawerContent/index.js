@@ -61,9 +61,9 @@ export function DrawerContent(props) {
             />
             <DrawerItem
               icon={({color, size}) => (
-                <Icon name="account-outline" color={color} size={size} />
+                <Icon name="account-check-outline" color={color} size={size} />
               )}
-              label="Grupos"
+              label="Meus Grupos"
               onPress={() => {
                 props.navigation.navigate('Groups');
               }}
@@ -71,12 +71,11 @@ export function DrawerContent(props) {
 
             <DrawerItem
               icon={({color, size}) => (
-                <Icon name="account-check-outline" color={color} size={size} />
+                <Icon name="account-outline" color={color} size={size} />
               )}
-              label="Suporte"
+              label="Grupos Privados"
               onPress={() => {
-                //props.navigation.navigate('SupportScreen');
-                Alert.alert('Ainda não implementado');
+                props.navigation.navigate('PrivateGroups');
               }}
             />
           </Drawer.Section>

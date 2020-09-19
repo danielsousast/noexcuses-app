@@ -5,6 +5,7 @@ import Notifications from '../screens/Notifications';
 import Groups from '../screens/Groups';
 import Profile from '../screens/Profile';
 import {DrawerContent} from '../components/DrawerContent';
+import PrivateGroups from '../screens/PrivateGroups';
 
 const Stack = createDrawerNavigator();
 
@@ -26,6 +27,8 @@ export default function HomeDrawer() {
           title: 'Grupos',
         }}
       />
+
+      <Stack.Screen name="PrivateGroups" component={PrivateGroups} />
     </Stack.Navigator>
   );
 }

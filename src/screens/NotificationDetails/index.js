@@ -4,6 +4,7 @@ import {Container, BackButton} from './styles';
 import {useSelector} from 'react-redux';
 import api from '../../services/api';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import {Header} from 'react-native-elements';
 
 const NotificationDetails = ({navigation, route}) => {
   const {notificationId} = route.params;
@@ -21,16 +22,38 @@ const NotificationDetails = ({navigation, route}) => {
       });
   }, []);
 
+  const renderWebview = () => {
+    if (notificationLink) {
+      return (
+        <WebView
+          source={{
+            uri: notificationLink,
+          }}
+        />
+      );
+    }
+  };
+
   return (
     <Container>
-      <BackButton onPress={() => navigation.goBack()}>
-        <Icon name="keyboard-backspace" size={26} color="#3c4560" />
-      </BackButton>
-      <WebView
-        source={{
-          uri: `https://devkode.com.br/api/notification/${notificationId}`,
+      <Header
+        containerStyle={{
+          height: 100,
+          backgroundColor: '#64d8d7',
+        }}
+        centerComponent={{
+          text: 'Notificação',
+          style: {fontSize: 18, color: '#fff', fontWeight: '700'},
+        }}
+        leftComponent={{
+          icon: 'chevron-left',
+          color: '#fff',
+          size: 38,
+
+          onPress: () => navigation.goBack(),
         }}
       />
+      {renderWebview()}
     </Container>
   );
 };
