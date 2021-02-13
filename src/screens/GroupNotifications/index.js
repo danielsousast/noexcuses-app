@@ -18,6 +18,7 @@ import Loading from '../../components/Loading';
 import colors from '../../styles/colors';
 import {Button} from 'react-native';
 import {Header} from 'react-native-elements';
+import EmptyMessage from '../../components/EmptyMessage';
 
 const GroupNotifications = () => {
   const [notifications, setNotifications] = useState([]);
@@ -75,13 +76,19 @@ const GroupNotifications = () => {
     loadNotifications();
   }, []);
 
+  const renderEmpty = () => {
+    if (formatedNotifications.length === 0 && !loading) {
+      return <EmptyMessage>Nenhuma notificação encontrada</EmptyMessage>;
+    }
+  };
+
   return (
     <>
       <Container>
         <Header
           containerStyle={{
             height: 120,
-            backgroundColor: '#64d8d7',
+            backgroundColor: '#226bf2',
           }}
           centerComponent={{
             text: 'Notificações',
@@ -94,12 +101,8 @@ const GroupNotifications = () => {
 
             onPress: () => navigation.goBack(),
           }}
-          rightComponent={{
-            icon: 'settings',
-            color: '#fff',
-            size: 28,
-          }}
         />
+        {renderEmpty()}
         <List
           contentContainerStyle={{
             paddingBottom: 10,

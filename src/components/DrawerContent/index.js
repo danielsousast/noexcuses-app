@@ -1,6 +1,6 @@
 import React, {useCallback} from 'react';
 import {View, Text, StyleSheet, Alert} from 'react-native';
-import {Avatar, Drawer, TouchableRipple, Switch} from 'react-native-paper';
+import {Drawer, TouchableRipple, Switch} from 'react-native-paper';
 import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -12,10 +12,13 @@ import {
   User,
   Title,
   UserInfo,
+  Avatar,
+  AvatarLetter,
 } from './styles';
 import {useDispatch, useSelector} from 'react-redux';
 import {signOut} from '../../store/actions/authAction';
 import {useNavigation} from '@react-navigation/native';
+import UserImage from '../../images/avatar.png';
 
 export function DrawerContent(props) {
   const dispath = useDispatch();
@@ -36,15 +39,16 @@ export function DrawerContent(props) {
         <DrawerContainer>
           <UserInfoSection>
             <UserInfo>
-              <Avatar.Image
-                source={{
-                  uri: 'https://api.adorable.io/avatars/50/abott@adorable.png',
-                }}
-                size={50}
-              />
+              <Avatar>
+                <AvatarLetter>
+                  {profile.name && profile.name.substr(0, 1)}
+                </AvatarLetter>
+              </Avatar>
               <User>
-                <Title>{profile.name}</Title>
-                <Caption>{profile.email}</Caption>
+                <Title numberOfLines={1}>{profile.name && profile.name}</Title>
+                <Caption numberOfLines={1}>
+                  {profile.email && profile.email}
+                </Caption>
               </User>
             </UserInfo>
           </UserInfoSection>
@@ -79,19 +83,19 @@ export function DrawerContent(props) {
               }}
             />
           </Drawer.Section>
-          <Drawer.Section title="Preferências">
-            <TouchableRipple
-              onPress={() => {
-                toggleTheme();
-              }}>
-              <PreferencesSection>
-                <Text>Dark Theme</Text>
-                <View pointerEvents="none">
-                  <Switch value={true} />
-                </View>
-              </PreferencesSection>
-            </TouchableRipple>
-          </Drawer.Section>
+          {/*           <Drawer.Section title="Preferências">
+          <TouchableRipple
+            onPress={() => {
+              toggleTheme();
+            }}>
+            <PreferencesSection>
+              <Text>Dark Theme</Text>
+              <View pointerEvents="none">
+                <Switch value={true} />
+              </View>
+            </PreferencesSection>
+          </TouchableRipple>
+        </Drawer.Section> */}
         </DrawerContainer>
       </DrawerContentScrollView>
       <Drawer.Section

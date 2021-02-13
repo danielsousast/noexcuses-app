@@ -16,7 +16,7 @@ export function* SignIn({payload}) {
 
     yield put(signInSuccess(token, user_data));
   } catch (error) {
-    Alert.alert('Falha no login', error.message);
+    Alert.alert('Falha no login', 'Tente novamente');
     yield put(signFailure());
   }
 }

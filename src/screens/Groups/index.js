@@ -9,6 +9,7 @@ import {Container, List} from './styles';
 import {requestGroupPermission} from '../../store/actions/userActions';
 import Loading from '../../components/Loading';
 import {Header} from 'react-native-elements';
+import EmptyMessage from '../../components/EmptyMessage';
 
 const Groups = () => {
   const [groupsList, setGroupsList] = useState([]);
@@ -45,13 +46,19 @@ const Groups = () => {
     navigation.navigate('GroupNotifications', {groupId: id});
   }
 
+  const renderEmpty = () => {
+    if (groupsList.length === 0 && !loading) {
+      return <EmptyMessage>Nenhum grupo encontrado</EmptyMessage>;
+    }
+  };
+
   return (
     <>
       <Container>
         <Header
           containerStyle={{
             height: 120,
-            backgroundColor: '#64d8d7',
+            backgroundColor: '#226bf2',
           }}
           centerComponent={{
             text: 'Meus Grupos',
@@ -65,7 +72,7 @@ const Groups = () => {
             onPress: () => navigation.goBack(),
           }}
         />
-
+        {renderEmpty()}
         <List
           contentContainerStyle={{
             paddingBottom: 10,

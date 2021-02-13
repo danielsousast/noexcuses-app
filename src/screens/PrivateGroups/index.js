@@ -4,11 +4,12 @@ import {useSelector, useDispatch} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 import api from '../../services/api';
 import GroupItem from '../../components/GroupItem';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import {Container, List} from './styles';
 import {requestGroupPermission} from '../../store/actions/userActions';
 import Loading from '../../components/Loading';
 import {Header} from 'react-native-elements';
+import colors from '../../styles/colors';
+import EmptyMessage from '../../components/EmptyMessage';
 
 const PrivateGroups = () => {
   const [groupsList, setGroupsList] = useState([]);
@@ -47,13 +48,19 @@ const PrivateGroups = () => {
     );
   }
 
+  const renderEmpty = () => {
+    if (groupsList.length === 0 && !loading) {
+      return <EmptyMessage>Nenhum grupo encontrado</EmptyMessage>;
+    }
+  };
+
   return (
     <>
       <Container>
         <Header
           containerStyle={{
             height: 120,
-            backgroundColor: '#64d8d7',
+            backgroundColor: colors.blue,
           }}
           centerComponent={{
             text: 'Grupos Privados',
@@ -66,13 +73,8 @@ const PrivateGroups = () => {
 
             onPress: () => navigation.openDrawer(),
           }}
-          rightComponent={{
-            icon: 'settings',
-            color: '#fff',
-            size: 28,
-          }}
         />
-
+        {renderEmpty()}
         <List
           contentContainerStyle={{
             paddingBottom: 10,
@@ -84,7 +86,7 @@ const PrivateGroups = () => {
             <GroupItem
               grupo={item}
               onPress={() => handleGroup(item.id)}
-              badge={'Participo'}
+              badge="Não participo"
             />
           )}
         />

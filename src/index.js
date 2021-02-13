@@ -6,6 +6,7 @@ import {StatusBar} from 'react-native';
 
 import {store, persistor} from './store';
 import Routes from './routes';
+import colors from './styles/colors';
 
 export default function Index() {
   return (
@@ -13,7 +14,7 @@ export default function Index() {
       <PersistGate persistor={persistor}>
         <Routes />
       </PersistGate>
-      <StatusBar backgroundColor="#fafafa" barStyle="dark-content" />
+      <StatusBar backgroundColor={colors.blue} barStyle="dark-content" />
     </Provider>
   );
 }

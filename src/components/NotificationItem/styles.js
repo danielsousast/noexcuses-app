@@ -57,5 +57,4 @@ export const Date = styled.Text`
   color: #333;
   font-size: 10px;
   font-weight: 600;
-  text-transform: uppercase;
 `;

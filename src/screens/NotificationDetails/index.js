@@ -5,6 +5,8 @@ import {useSelector} from 'react-redux';
 import api from '../../services/api';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {Header} from 'react-native-elements';
+import {Alert} from 'react-native';
+import colors from '../../styles/colors';
 
 const NotificationDetails = ({navigation, route}) => {
   const {notificationId} = route.params;
@@ -18,8 +20,14 @@ const NotificationDetails = ({navigation, route}) => {
         token,
       })
       .then(response => {
+        console.log(response);
         setNotificationLink(response.data.content.link);
+      })
+      .catch(error => {
+        Alert.alert('Ocorreu um erro ao carregar a notificação');
       });
+
+    console.log('notificationId', notificationId);
   }, []);
 
   const renderWebview = () => {
@@ -39,7 +47,7 @@ const NotificationDetails = ({navigation, route}) => {
       <Header
         containerStyle={{
           height: 100,
-          backgroundColor: '#64d8d7',
+          backgroundColor: colors.blue,
         }}
         centerComponent={{
           text: 'Notificação',

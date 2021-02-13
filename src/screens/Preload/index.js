@@ -39,17 +39,21 @@ export default function Preload({navigation}) {
   }, []);
 
   function onOpened(openResult) {
-    const title = openResult.notification.payload.title;
-    const body = openResult.notification.payload.body;
+    const {title, body, notificationID: id} = openResult.notification.payload;
+
+    console.log('Payload', openResult.notification.payload);
 
     const notification = {
+      id,
       title,
       body,
     };
 
     dispatch(addNotification(notification));
 
-    navigation.navigate('Notification', {notification});
+    /*     navigation.navigate('NotificationDetails', {
+      notificationId: notification.id,
+    }); */
   }
   return <View />;
 }

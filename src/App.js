@@ -1,10 +1,8 @@
 import 'react-native-gesture-handler';
-import React, {useEffect} from 'react';
+import React from 'react';
 import {useSelector} from 'react-redux';
-import api from './services/api';
 
 import CreateRouter from './routes';
-import {StatusBar} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
 export default function App() {

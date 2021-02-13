@@ -18,29 +18,66 @@ import Loading from '../../components/Loading';
 import colors from '../../styles/colors';
 import {Button} from 'react-native';
 import {Header} from 'react-native-elements';
+import EmptyMessage from '../../components/EmptyMessage';
+import {ptBR} from 'date-fns/locale';
 
 const Notifications = () => {
   const [notifications, setNotifications] = useState([]);
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
 
   const navigation = useNavigation();
   const token = useSelector(state => state.auth.token);
 
-  async function loadNotifications() {
+  async function loadNotifications(reset = false) {
     setLoading(true);
+
+    const nextPage = reset ? 1 : page + 1;
+
     const response = await api.post('api/private/history', {
       token,
+      page: nextPage,
+      limit: 5,
     });
 
     if (response.data) {
-      setNotifications(response.data.notifications.data.items);
+      setNotifications(
+        reset
+          ? response.data.notifications.data.items
+          : [...notifications, ...response.data.notifications.data.items],
+      );
     }
+
+    setPage(nextPage);
     setLoading(false);
   }
 
+  async function refreshNotifications(reset = false) {
+    setRefreshing(true);
+
+    const nextPage = reset ? 1 : page + 1;
+
+    const response = await api.post('api/private/history', {
+      token,
+      page: nextPage,
+      limit: 5,
+    });
+
+    if (response.data) {
+      setNotifications(
+        reset
+          ? response.data.notifications.data.items
+          : [...notifications, ...response.data.notifications.data.items],
+      );
+    }
+
+    setPage(nextPage);
+    setRefreshing(false);
+  }
+
   useEffect(() => {
-    loadNotifications();
+    loadNotifications(true);
   }, []);
 
   React.useLayoutEffect(() => {
@@ -57,7 +94,9 @@ const Notifications = () => {
         id,
         title,
         description,
-        dateFormatted: format(parseISO(send_on), 'mm/dd/yyyy'),
+        dateFormatted: format(parseISO(send_on), "dd/MM/yyyy 'às' HH:mm", {
+          locale: ptBR,
+        }),
       };
     });
   }, [notifications]);
@@ -68,9 +107,19 @@ const Notifications = () => {
     });
   }, []);
 
-  const handleOnRechead = useCallback(async () => {
+  const handleOnRechead = async () => {
     loadNotifications();
-  }, []);
+  };
+
+  const handleOnRefresh = async () => {
+    refreshNotifications(true);
+  };
+
+  const renderEmpty = () => {
+    if (formatedNotifications.length === 0 && !loading) {
+      return <EmptyMessage>Nenhuma notificação encontrada</EmptyMessage>;
+    }
+  };
 
   return (
     <>
@@ -78,7 +127,7 @@ const Notifications = () => {
         <Header
           containerStyle={{
             height: 120,
-            backgroundColor: '#64d8d7',
+            backgroundColor: colors.blue,
           }}
           centerComponent={{
             text: 'Notificações',
@@ -91,12 +140,8 @@ const Notifications = () => {
 
             onPress: () => navigation.openDrawer(),
           }}
-          rightComponent={{
-            icon: 'settings',
-            color: '#fff',
-            size: 28,
-          }}
         />
+        {renderEmpty()}
         <List
           contentContainerStyle={{
             paddingBottom: 10,
@@ -110,6 +155,10 @@ const Notifications = () => {
               onPress={() => handleNavigateToNotification(item.id)}
             />
           )}
+          onEndReached={handleOnRechead}
+          onEndReachedThreshold={0.1}
+          onRefresh={handleOnRefresh}
+          refreshing={false}
         />
       </Container>
       {loading && <Loading />}
