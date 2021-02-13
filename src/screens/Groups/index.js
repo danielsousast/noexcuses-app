@@ -17,28 +17,24 @@ const Groups = () => {
   const token = useSelector(state => state.auth.token);
   const [loading, setLoading] = useState(false);
 
-  const [active, setActive] = useState(1);
-
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
-  function getPrivateGroups() {
-    return api.post('api/group/all', {token});
+  async function loadGroups() {
+    setLoading(true);
+    const response = await api.post('api/group/list', {token});
+
+    setGroupsList(response.data.groups.data);
+    setLoading(false);
   }
 
-  function getUserGroups() {
-    return api.post('api/group/list', {token});
+  async function refreshGroups() {
+    const response = await api.post('api/group/list', {token});
+
+    setGroupsList(response.data.groups.data);
   }
 
   useEffect(() => {
-    async function loadGroups() {
-      setLoading(true);
-      const response = await api.post('api/group/list', {token});
-
-      setGroupsList(response.data.groups.data);
-      setLoading(false);
-    }
-
     loadGroups();
   }, []);
 
@@ -87,6 +83,8 @@ const Groups = () => {
               badge={'Participo'}
             />
           )}
+          onRefresh={refreshGroups}
+          refreshing={false}
         />
       </Container>
       {loading && <Loading />}

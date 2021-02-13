@@ -1,9 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {WebView} from 'react-native-webview';
-import {Container, BackButton} from './styles';
+import {Container} from './styles';
 import {useSelector} from 'react-redux';
 import api from '../../services/api';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import {Header} from 'react-native-elements';
 import {Alert} from 'react-native';
 import colors from '../../styles/colors';
@@ -20,14 +19,11 @@ const NotificationDetails = ({navigation, route}) => {
         token,
       })
       .then(response => {
-        console.log(response);
         setNotificationLink(response.data.content.link);
       })
       .catch(error => {
         Alert.alert('Ocorreu um erro ao carregar a notificação');
       });
-
-    console.log('notificationId', notificationId);
   }, []);
 
   const renderWebview = () => {

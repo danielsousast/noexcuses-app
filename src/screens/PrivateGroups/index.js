@@ -20,17 +20,23 @@ const PrivateGroups = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
+  async function loadGroups() {
+    setLoading(true);
+    const response = await api.post('api/group/all', {token});
+
+    setGroupsList(response.data.groups.data);
+    setLoading(false);
+  }
+
   useEffect(() => {
-    async function loadGroups() {
-      setLoading(true);
-      const response = await api.post('api/group/all', {token});
-
-      setGroupsList(response.data.groups.data);
-      setLoading(false);
-    }
-
     loadGroups();
   }, []);
+
+  async function refreshGroups() {
+    const response = await api.post('api/group/all', {token});
+
+    setGroupsList(response.data.groups.data);
+  }
 
   function handleGroup(id) {
     Alert.alert(
@@ -89,6 +95,8 @@ const PrivateGroups = () => {
               badge="Não participo"
             />
           )}
+          onRefresh={refreshGroups}
+          refreshing={false}
         />
       </Container>
       {loading && <Loading />}
